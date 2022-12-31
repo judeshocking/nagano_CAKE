@@ -20,19 +20,13 @@
         <div class="form-group">
           <%= f.text_field :name,class: "form-control" %>
         </div>
-        <div class="form-check">
-          <%= f.radio_button :is_enabled, :true %>
-          <%= f.label :is_enabled, "有効" %>
-          <%= f.radio_button :is_enabled, :false %>
-          <%= f.label :is_enabled, "無効" %>
-        </div>
 
         <div class="row">
           <%= f.submit "追加", class: "btn btn-primary mt-3 mx-auto" %>
         </div>
             <% end %>
 
-        <table class="table table-bordere">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>ジャンル</th>
@@ -40,20 +34,12 @@
               <th colspan="1"></th>
             </tr>
           </thead>
-
           <tbody>
             <% @genres.each do |genre| %>
-             <tr>
-               <td><%= genre.name %></td>
-               <td>
-                 <% if genre.is_enabled == true %>
-                  有効
-                 <% else %>
-                  無効
-                 <% end %>
-               </td>
-               <td><%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-primary btn-sm" %></td>
-             </tr>
+              <tr>
+                <td><%= genre.name %></td>
+                <td><%= link_to "編集", edit_admin_genre_path(@genres.ids), class: "btn btn-primary btn-sm" %></td>
+              </tr>
             <% end %>
           </tbody>
         </table>

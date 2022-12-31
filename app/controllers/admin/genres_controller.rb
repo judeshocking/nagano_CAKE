@@ -12,7 +12,7 @@ class Admin::GenresController < ApplicationController
     if @genre.save
       redirect_to admin_genres_path
     else
-      flash[:genre_created_error] = "ジャンル名を入力してください。"
+      flash[:notice] = "ジャンル名を入力してください。"
       redirect_to
     end
   end
@@ -35,6 +35,6 @@ class Admin::GenresController < ApplicationController
 
   private
   def genre_params
-    params.require(:genre).permit(:name, :is_enabled)
+    params.require(:genre).permit(:name)
   end
 end
