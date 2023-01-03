@@ -1,13 +1,5 @@
-<div class="container my-5">
-  <div class="row">
-    <h2>商品新規登録</h2>
-  </div>
 
-  <div class="row d-flex justify-content-center">
-    <span><%= flash[:item_created_error] %></span>
-  </div>
-
-<%= form_with model: [:admin, @item], local: true do |f| %>
+  <%= form_with model: [:admin, @item], local: true do |f| %>
     <div class="row mt-5">
       <div class="col-sm-4">
         <%= f.label :商品画像 %>
@@ -34,10 +26,6 @@
           <%= f.label :販売ステータス, class: "col-sm-4" %>
           <%= f.select :is_active, [["販売可", "販売可"], ["販売不可","販売不可"]], class: "form-control col-sm-8" %>
         </div>
-        <div class="col-sm-2 mt-auto ml-5">
-          <%= f.submit :新規登録, class: "btn btn-primary" %>
-        </div>
       </div>
-    </div>
   <% end %>
 </div>
