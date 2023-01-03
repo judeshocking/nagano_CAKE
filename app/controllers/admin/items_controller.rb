@@ -1,5 +1,6 @@
 class Admin::ItemsController < ApplicationController
   def index
+    @items = Item.all
   end
 
   def new
@@ -7,10 +8,11 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Itme.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def create
@@ -25,7 +27,7 @@ class Admin::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if @item.update(item_prams)
+    if @item.update(item_params)
       redirect_to admin_item_path(@item)
     else
       flash[:item_created_error] = "商品情報が正しくに保存されていません"

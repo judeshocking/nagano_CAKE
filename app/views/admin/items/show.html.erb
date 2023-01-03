@@ -1,2 +1,51 @@
-<h1>Admin::Items#show</h1>
-<p>Find me in app/views/admin/items/show.html.erb</p>
+<div class="container my-5">
+  <div class="row">
+    <h2>商品詳細</h2>
+  </div>
+
+  <div class="row mt-3">
+    <div class="offset-sm-1 col-sm-3">
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, size: "200x200" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "200x200" %>
+      <% end %>
+    </div>
+
+    <div class="col-sm-4">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td>商品名</td>
+            <td><%= @item.name %></td>
+          </tr>
+          <tr>
+            <td>商品説明</td>
+            <td><%= @item.introduction %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td><%= @item.genre.name %></td>
+          </tr>
+          <tr>
+            <td>税抜価格</br>(税込価格)</td>
+            <td><%= @item.price %>(<%= (@item.price * 1.1).floor %>)円</td>
+          </tr>
+          <tr>
+            <td>販売ステータス</td>
+            <td><%= @item.is_active %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container text-center">
+      <div class="row align-items-start">
+        <div class="col">
+          <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
