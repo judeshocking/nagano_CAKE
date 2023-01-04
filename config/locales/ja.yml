@@ -1,0 +1,6 @@
+ja:
+  enums:
+    item:
+      is_active:
+        true: "販売可"
+        false: "販売不可"
