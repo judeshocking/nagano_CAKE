@@ -33,7 +33,12 @@
           </tr>
           <tr>
             <td>販売ステータス</td>
-            <td><%= @item.is_active %></td>
+            <td><% if @item.is_active == true %>
+                販売可
+                <% else %>
+                販売不可
+                <% end %>
+            </td>
           </tr>
         </tbody>
       </table>
