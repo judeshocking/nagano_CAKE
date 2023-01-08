@@ -1,2 +1,39 @@
-<h1>Public::Orders#new</h1>
-<p>Find me in app/views/public/orders/new.html.erb</p>
+<div class="container my-5">
+  <div class="row">
+    <h2>注文情報入力</h2>
+  </div>
+
+  <div class="row mt-5">
+    <div class="offset-sm-1 col-sm-7">
+      <strong>支払方法</strong>
+    </div>
+  </div>
+
+    <%= form_with model: [:public, @order], local: true do |f| %>
+    <div class="row mt-3">
+      <div class="offset-sm-2">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+        <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+        <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+        <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="offset-sm-1 col-sm-7">
+        <strong>お届け先</strong>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="offset-sm-2">
+        <% address = current_customer.postal_code + current_customer.address + current_customer.last_name + current_customer.first_name %>
+        <%= radio_button_tag :select, :my_address %>
+        <%= label_tag :select, "ご自身の住所", {value: :my_address, style: "display: inline-block;"} %>
+        <%= address %>
+        <%= radio_button_tag :select, :select_address %>
+      </div>
+    </div>
+
+
+    <% end %>
+</div>

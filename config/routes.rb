@@ -26,32 +26,12 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
 
 
   namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-  end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/compleate'
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :public do
-    get 'cart_items/index'
-  end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
-    get 'customers/quit'
-    get 'customers/out'
-  end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
-  end
-  namespace :public do
-    get 'homes/top'
+    root 'homes#top'
+    resources :addresses, only:[:index,:edit,:create,:update,:destory]
+    resources :orders, only:[:new,:confirm,:compleate,:index,:show,:create]
+    resources :cart_items, only:[:index,:update,:destory,:destroy_all,:create]
+    resources :customers, only:[:show,:edit,:update,:quit,:out]
+    resources :items, only:[:index,:show]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
