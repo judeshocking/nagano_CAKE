@@ -1,6 +1,7 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
+    @custome = Customer.find(current_customer.id)
   end
 
   def confirm
@@ -19,6 +20,10 @@ class Public::OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(:payment_method)
+  end
+
+  def custome_params
+    params.require(:custome).permit(:postal_code)
   end
 
 end

@@ -26,14 +26,11 @@
     </div>
     <div class="row mt-3">
       <div class="offset-sm-2">
-        <% address = current_customer.postal_code + current_customer.address + current_customer.last_name + current_customer.first_name %>
-        <%= radio_button_tag :select, :my_address %>
-        <%= label_tag :select, "ご自身の住所", {value: :my_address, style: "display: inline-block;"} %>
-        <%= address %>
-        <%= radio_button_tag :select, :select_address %>
+        <%= f.radio_button :select, :address %>
+        <%= f.label :select, "ご自身の住所" %>
+        <p><%= @custome.postal_code %>  <%= @custome.address %></p>
+        <p><%= @custome.last_name %>  <%= @custome.first_name %></p>
       </div>
     </div>
-
-
     <% end %>
 </div>
