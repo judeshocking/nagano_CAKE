@@ -1,0 +1,18 @@
+<div class="container my-5">
+  <div class="row">
+    <h2>注文履歴詳細</h2>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-9">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td>購入者</td>
+            <td><%= link_to admin_customer_date_path(@order.customer) do %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
