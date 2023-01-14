@@ -8,14 +8,25 @@
     <%= image_tag 'no_image.jpeg', :size =>'600x500' %>
   </div>
 
-  <div class="container new-item">
+  <div class="container">
     <h2>新着商品</h2>
-    <div class="row">
-      <%= @items.first(4).each do |item| %>
-        <%= link_to admin_item_path(item) do %>
-         <%= attachment_image_tag item, :image, :fill, 100, 100, format: 'jpeg', fallback: 'noimage.jpg', size: '200x200', class: "rounded" %><br>
+    <div class="row mt-3 mb-3 text-center text-md-left">
+      <% @items.first(4).each do |item| %>
+      <div class="col-xs-10 col-sm-10 col-md-6 col-lg-3">
+        <div class="card w-100 bg-transparent border-0" style="width: 18rem;">
+        <%= link_to public_item_path(item) do %>
+         <div class="img-wrap"><%= attachment_image_tag item, :image, :fill, 100, 100, format: 'jpeg', fallback: 'no_image.jpeg', size: '200x200', class: "rounded" %></div>
         <% end %>
+        </div>
+        <div class="card-body">
+          <strong class="card-text"><%= item.name %></span>
+        </div>
+        <div class="card-body">
+          <span class="card-text"><%= (item.price * 1.1).floor %> 円</span>
+        </div>
       <% end %>
+      </div>
+    <div class="text-right"><%= link_to "全ての商品をみる", public_items_path %></div>
     </div>
   </div>
 </div>
