@@ -35,6 +35,7 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
     resources :customers, only:[:show,:edit,:update,:quit,:out]
     resources :items, only:[:index,:show]
     get "/about" => "homes#about"
+    get "/customer/quit" => "customers#quit"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

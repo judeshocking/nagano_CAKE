@@ -1,4 +1,8 @@
 class Public::CustomersController < ApplicationController
+
+  def puit
+  end
+
   def show
   end
 
@@ -6,9 +10,6 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-  end
-
-  def quit
   end
 
 end
