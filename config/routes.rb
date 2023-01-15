@@ -17,7 +17,7 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
 
 #admin
   namespace :admin do
-    root "homes#top"
+    root 'homes#top'
     resources :customers, only:[:index,:edit,:show,:update]
     resources :genres, only:[:index,:edit,:create,:update]
     resources :items, except:[:destroy]
@@ -27,13 +27,13 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
   end
 
 
-  namespace :public do
-    root "homes#top"
+  scope module: :public do
     resources :addresses, only:[:index,:edit,:create,:update,:destory]
     resources :orders, only:[:new,:confirm,:compleate,:index,:show,:create]
     resources :cart_items, only:[:index,:update,:destory,:destroy_all,:create]
     resources :customers, only:[:show,:edit,:update,:quit,:out]
     resources :items, only:[:index,:show]
+    root "homes#top"
     get "/about" => "homes#about"
     get "/customer/quit" => "customers#quit"
   end
