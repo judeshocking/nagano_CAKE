@@ -2,9 +2,8 @@
   <div class="row">
     <h2>配送先登録/一覧</h2>
   </div>
-  <div><%= flash[:notice] %></div>
   <div class="row">
-    <div class="offset-sm-3 col-sm-6">
+    <div class="my-3 offset-sm-1 col-sm-8">
       <%= form_with model: @address, local: true do |f| %>
         <div class="form-group row">
           <%= f.label :郵便番号（ハイフンなし）, class:"col-sm-4" %>
@@ -24,9 +23,9 @@
       <% end %>
 
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
           <table class="table table-bordered">
-            <thead>
+            <thead class="table-active">
               <tr>
                 <th>郵便番号</th>
                 <th>住所</th>
@@ -40,7 +39,9 @@
                   <td><%= address.postal_code %></td>
                   <td><%= address.address %></td>
                   <td><%= address.name %></td>
-                  <td></td>
+                  <td><%= link_to "編集する", edit_address_path(address), class:"btn btn-success" %>
+                      <%= link_to "削除する", @address, method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-danger" %>
+                  </td>
                 </tr>
               <% end %>
             </tbody>
