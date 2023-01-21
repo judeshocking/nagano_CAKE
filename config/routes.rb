@@ -30,7 +30,8 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
   scope module: :public do
     resources :addresses, only:[:index,:edit,:create,:update,:destory]
     resources :orders, only:[:new,:confirm,:compleate,:index,:show,:create]
-    resources :cart_items, only:[:index,:update,:destory,:destroy_all,:create]
+    delete "/cart_items/destroy_all" => "cart_items#destroy_all"
+    resources :cart_items, only:[:index,:update,:destroy,:create]
     resources :customers, only:[:show,:edit,:update,:quit,:out]
     resources :items, only:[:index,:show]
     root "homes#top"

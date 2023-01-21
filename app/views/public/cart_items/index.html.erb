@@ -1,2 +1,57 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
+<div class="container my-5">
+  <div class="row">
+    <h2>ショッピングカート</h2>
+  </div>
+
+  <div class="offset-9">
+    <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, class: "btn btn-sm btn-danger" %>
+  </div>
+
+  <div class="row mt-3">
+    <div class="offset-sm-1 col-sm-10">
+      <table class="table table-striped table-hover text-center">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @cart_items.each do |cart_item| %>
+          <tbody>
+            <tr>
+              <td>
+                <%= attachment_image_tag cart_item.item, :image, :fill, 100, 100, format: 'jpeg', fallback: 'no_image.jpeg', size: '50x50' %>
+                <span><%= cart_item.item.name %></span>
+              </td>
+              <td><%= cart_item.item.with_tax_price %></td>
+              <td>
+                <%= form_with model: cart_item, local: true do |f| %>
+                  <%= f.select :amount, *[1..99], include_blank: "個数選択" %>
+                  <%= f.submit "変更", class: "btn btn-primary" %>
+                <% end %>
+              </td>
+              <td><%= cart_item.subtotal %></td>
+              <td><%= link_to "削除", cart_item_path(cart_item),method: :delete, class: "btn btn-sm btn-danger" %></td>
+              <td> <% @total +=  cart_item.subtotal %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+      <div class="offset-9">
+        <table class="table table-striped table-hover text-cente">
+          <tr><td><strong>合計金額</strong></td><td><strong><%= @total %></strong></td></tr>
+        </table>
+      </div>
+
+      <div class="offset-sm-1 col-sm-10">
+        <%= link_to "買い物を続ける", root_url, class: "btn btn-primary" %>
+      </div>
+      <div class="text-center">
+        <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success mt-5" %>
+      </div>
+    </div>
+  </div>
+</div>
