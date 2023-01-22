@@ -29,7 +29,9 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
 
   scope module: :public do
     resources :addresses, only:[:index,:edit,:create,:update,:destory]
-    resources :orders, only:[:new,:confirm,:compleate,:index,:show,:create]
+    get "/orders/compleate" => "orders#compleate"
+    resources :orders, only:[:new,:compleate,:index,:show,:create]
+    post "/orders/confirm" => "orders#confirm"
     delete "/cart_items/destroy_all" => "cart_items#destroy_all"
     resources :cart_items, only:[:index,:update,:destroy,:create]
     resources :customers, only:[:show,:edit,:update,:quit,:out]
