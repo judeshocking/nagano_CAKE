@@ -10,7 +10,7 @@ class Public::CartItemsController < ApplicationController
       @cart_item_check.amount += params[:cart_item][:amount].to_i
       @cart_item_check.save
       flash[:into_cart_error] = "すでにカートに追加されている商品です。"
-      redirect_to cart_item_path
+      redirect_to cart_items_path
     else
       @cart_item = CartItem.new(cart_item_params)
       @cart_item.customer_id = current_customer.id

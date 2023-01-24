@@ -2,4 +2,47 @@
   <div class="row">
     <h2>注文履歴詳細</h2>
   </div>
+
+  <div class="row my-3">
+    <div class="col-sm-8 col-md-8 col-lg-8 px-8">
+      <strong>注文情報</strong>
+      <table class="table table-bordered">
+        <tr><th>注文日</th><td><%= @order.created_at.strftime('%Y/%m/%d') %></td></tr>
+        <tr><th>配送先</th><td><%= "〒#{@order.postal_code}" %><br><%= @order.address %><br><%= @order.name %></td></tr>
+        <tr><th>支払方法</th><td><%= @order.payment_method %></td></tr>
+        <tr><th>ステータス</th><td><%= @order.order_status %></td></tr>
+      </table>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3 px-3 offset-1">
+      <strong>注文情報</strong>
+      <table class="table table-bordered">
+        <tr><th>商品合計</th><td><%= @order.billing_amount - 800 %></td></tr>
+        <tr><th>送料</th><td>800</td></tr>
+        <tr><th>ご請求額</th><td><%= @order.billing_amount %></td></th>
+      </table>
+    </div>
+    <div class="col-sm-8 col-md-8 col-lg-8 px-8">
+      <strong>注文情報</strong>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>商品</th>
+            <th>単価（税込）</th>
+            <th>個数</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <% @order_items.each do |order_item| %>
+          <tbody>
+            <tr>
+              <td><%= order_item.item.name %></td>
+              <td><%= order_item.price_tax %></td>
+              <td><%= order_item.amount %></td>
+              <td><%= order_item.amount * order_item.price_tax %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
 </div>
