@@ -22,7 +22,7 @@
       </table>
     </div>
     <div class="col-sm-8 col-md-8 col-lg-8 px-8">
-      <strong>注文情報</strong>
+      <strong>注文内容</strong>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -32,13 +32,13 @@
             <th>小計</th>
           </tr>
         </thead>
-        <% @order_items.each do |order_item| %>
+        <% @order.order_items.each do |order_item| %>
           <tbody>
             <tr>
               <td><%= order_item.item.name %></td>
-              <td><%= order_item.price_tax %></td>
+              <td><%= order_item.item.price %></td>
               <td><%= order_item.amount %></td>
-              <td><%= order_item.amount * order_item.price_tax %></td>
+              <td><%= order_item.amount * order_item.item.price %></td>
             </tr>
           </tbody>
         <% end %>

@@ -35,12 +35,11 @@ class Public::OrdersController < ApplicationController
         order_item = OrderItem.new
         order_item.item_id = cart.item_id
         order_item.order_id = @order.id
-        order_item.order_id = cart.amount
-        order_item.order_id = cart.item.price
+        order_item.amount = cart.amount
         order_item.save
       end
-      redirect_to orders_confirm_path
       cart_items.destroy_all
+      redirect_to orders_compleate_path
     else
       @order = Order.new(order_params)
       render :new
@@ -54,7 +53,6 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_items = @order.order_items
   end
 
 
