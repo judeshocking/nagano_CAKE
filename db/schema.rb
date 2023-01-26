@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2023_01_14_090623) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.boolean "is_deleted", default: true, null: false
+    t.boolean "is_deleted", default: false, null: false
     t.string "last_name", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name_kana", default: "", null: false

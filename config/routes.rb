@@ -34,7 +34,8 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
     post "/orders/confirm" => "orders#confirm"
     delete "/cart_items/destroy_all" => "cart_items#destroy_all"
     resources :cart_items, only:[:index,:update,:destroy,:create]
-    resources :customers, only:[:show,:edit,:update,:quit,:out]
+    patch "/customers/out" => "customers#out"
+    resources :customers, only:[:show,:edit,:update]
     resources :items, only:[:index,:show]
     root "homes#top"
     get "/about" => "homes#about"

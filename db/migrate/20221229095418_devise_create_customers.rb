@@ -4,7 +4,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
   def change
     create_table :customers do |t|
       ## Database authenticatable
-      t.boolean :is_deleted,        default: true, null: false
+      t.boolean :is_deleted,        default: false, null: false
       ##退会ステータス
 
       t.string :last_name,          null: false, default: ""

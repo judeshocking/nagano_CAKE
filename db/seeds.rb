@@ -9,5 +9,5 @@
 # AdminModel(1)
 Admin.create!(
   email: 'judeshocking@mail',
-  password: 'testtest'
+  password: 'testtesttest'
   )
