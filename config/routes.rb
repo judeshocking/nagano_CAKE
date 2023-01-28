@@ -20,10 +20,9 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
     root 'homes#top'
     resources :customers, only:[:index,:edit,:show,:update]
     resources :genres, only:[:index,:edit,:create,:update]
-    resources :items, except:[:destroy]
+    resources :items, only: [:index, :create, :new, :show, :edit, :update]
     resources :orders, only:[:show,:update]
-
-
+    resources :order_items, only: [:update]
   end
 
 

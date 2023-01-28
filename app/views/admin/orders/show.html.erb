@@ -6,11 +6,73 @@
   <div class="row mt-3">
     <div class="col-sm-9">
       <table class="table table-borderless">
-        <tbody>
+        <tr>
+          <th>購入者</th>
+          <td><%= link_to admin_customer_path(@order.customer) do %>
+              <%= @order.customer.last_name %>
+              <%= @order.customer.first_name %>
+              <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>注文日</th>
+          <td><%= @order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.customer.last_name %> <%= @order.customer.first_name %></td>
+        </tr>
+        <tr>
+          <th>支払方法</th>
+          <td><%= @order.payment_method %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+          <td><%= form_with model:@order, url: admin_order_path, local: true do |f| %>
+                <%= f.select :status, ["waiting_payment", "payment_confirmation","production","shipping_preparation","shipped"] %>
+                <%= f.submit "更新", class: 'btn btn-primary' %>
+              <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <table class="table table-bordered">
+        <thead>
           <tr>
-            <td>購入者</td>
-            <td><%= link_to admin_customer_date_path(@order.customer) do %></td>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>制作ステータス</th>
           </tr>
+        </thead>
+        <tbody>
+          <% @order.order_items.each do |order_items| %>
+            <tr>
+              <td><%= order_items.item.name %></td>
+              <td><%= (order_items.item.price * 1.1).floor %></td>
+              <td><%= order_items.amount %></td>
+              <td><%= (order_items.amount * order_items.item.price * 1.1).floor %></td>
+              <td><%= form_with model:order_items, url: admin_items_path(order_items), local: true do |f| %>
+                    <%= f.select :maiking_status, ["production_not_allowed", "waiting_for_production", "production", "production_completed"] %>
+                    <%= f.submit "更新", class: 'btn btn-primary' %>
+                  <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3 px-3 offset-1">
+      <table class="table table-bordered">
+        <tbody>
+          <tr><th>商品合計</th><td><%= @order.billing_amount - 800 %></td></tr>
+          <tr><th>送料</th><td>800</td></tr>
+          <tr><th>請求金額合計</th><td><%= @order.billing_amount %></td></tr>
         </tbody>
       </table>
     </div>
