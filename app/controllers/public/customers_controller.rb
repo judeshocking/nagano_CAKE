@@ -1,6 +1,9 @@
 class Public::CustomersController < ApplicationController
 
+  before_action :reject_invalid_customer, only: [:create]
+
   def quit
+    @customer = current_customer
   end
 
   def show
@@ -22,10 +25,12 @@ class Public::CustomersController < ApplicationController
   end
 
   def out
-    @customer = Customer.find(current_customer.id)
-    @customer.update(is_deleted: true)
-    reset_session
-　　redirect_to root_pathth
+    @customer = current_customer
+    @customer.out_status = true
+    if @customer.uodate(is_deleted: false)
+      reset_session
+      redirect_to root_path
+    end
   end
 
   private

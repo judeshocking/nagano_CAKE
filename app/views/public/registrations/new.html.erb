@@ -10,12 +10,16 @@
     <div class="form-group row">
       <%= f.label :名前, class:"col-sm-4" %>
       <div class="row">
+        <%= f.label "(姓)",class: "col-lg-2" %>
         <%= f.text_field :last_name, placeholder:"令和",class:"form-control col-sm-4" %>
+        <%= f.label "(名)",class: "col-lg-2" %>
         <%= f.text_field :first_name, placeholder:"道子",class:"form-control col-sm-4" %>
       </div>
       <%= f.label :カナ, class:"col-sm-4" %>
       <div class="row">
+        <%= f.label "(セイ)",class: "col-lg-2" %>
         <%= f.text_field :last_name_kana, placeholder:"レイワ",class:"form-control col-sm-4" %>
+        <%= f.label "(メイ)",class: "col-lg-2" %>
         <%= f.text_field :first_name_kana, placeholder:"ミチコ",class:"form-control col-sm-4" %>
       </div>
     </div>
