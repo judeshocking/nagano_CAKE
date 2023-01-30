@@ -27,18 +27,18 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
 
 
   scope module: :public do
-    resources :addresses, only:[:index,:edit,:create,:update,:destory]
+    resources :addresses, only:[:index,:edit,:create,:update,:destroy]
     get "/orders/compleate" => "orders#compleate"
     resources :orders, only:[:new,:index,:show,:create]
     post "/orders/confirm" => "orders#confirm"
     delete "/cart_items/destroy_all" => "cart_items#destroy_all"
     resources :cart_items, only:[:index,:update,:destroy,:create]
+    get "/customer/quit" => "customers#quit"
     patch "/customers/out" => "customers#out"
     resources :customers, only:[:show,:edit,:update]
     resources :items, only:[:index,:show]
     root "homes#top"
     get "/about" => "homes#about"
-    get "/customer/quit" => "customers#quit"
     get "/thanks" => "homes#thanks"
   end
 

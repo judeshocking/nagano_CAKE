@@ -26,12 +26,12 @@ class Public::CustomersController < ApplicationController
 
   def out
     @customer = current_customer
-    @customer.out_status = true
-    if @customer.uodate(is_deleted: false)
+    if @customer.update(is_deleted: false)
       reset_session
       redirect_to root_path
     end
   end
+
 
   private
     def customer_params

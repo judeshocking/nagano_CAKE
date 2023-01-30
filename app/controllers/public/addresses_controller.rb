@@ -34,6 +34,14 @@ class Public::AddressesController < ApplicationController
     end
   end
 
+  def destroy
+    @address = Address.find(params[:id])
+    @address.customer_id = current_customer.id
+    @address.destroy
+    flash[:success] = "配送先の削除が完了しました。"
+    redirect_to addresses_path
+  end
+
   private
   def address_params
     params.require(:address).permit(:postal_code,:address,:name)
