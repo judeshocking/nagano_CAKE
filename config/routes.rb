@@ -33,8 +33,8 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
     post "/orders/confirm" => "orders#confirm"
     delete "/cart_items/destroy_all" => "cart_items#destroy_all"
     resources :cart_items, only:[:index,:update,:destroy,:create]
-    get "/customer/quit" => "customers#quit"
-    patch "/customers/out" => "customers#out"
+    get "/customer/:id/quit" => "customers#quit", as: "quit"
+    patch "/customers/:id/out" => "customers#out", as: "out"
     resources :customers, only:[:show,:edit,:update]
     resources :items, only:[:index,:show]
     root "homes#top"

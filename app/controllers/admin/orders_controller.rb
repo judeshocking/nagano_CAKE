@@ -5,14 +5,10 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    @order.update(order_params)
-    @order_items = @order.order_items
+    @order_items = OrderItem.where(order_id: params[:id])
 
-    if @order.status == "入金確認"
-       @order_items.each do |order_item|
-         order_item.maiking_status = "製作待ち"
-         order_item.save
-       end
+    if @order.update(order_params)
+       @order_items.update_all(making_status: 1) if @order.status == "入金確認"
     end
     redirect_to admin_order_path
   end
@@ -22,3 +18,4 @@ class Admin::OrdersController < ApplicationController
     params.require(:order).permit(:status)
   end
 end
+
