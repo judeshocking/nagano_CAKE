@@ -30,10 +30,10 @@
       <div class="row">
         <div class="col-sm-4">
           <table class="table table-bordered">
-            <% @cart_items.each do |cart_item| %>
+            <%= form_with model: @order, url: orders_path, local: true do |f| %>
             <tr><th>送料</th><td><strong>800</td></tr>
-            <tr><th>商品合計</th><td><%= cart_item.subtotal %></td></tr>
-            <tr><th>請求金額</th><td><%= @total = cart_item.subtotal + 800 %></td></tr>
+            <tr><th>商品合計</th><td><%= @billing_amount %></td></tr>
+            <tr><th>請求金額</th><td><%= @billing_amount + 800 %></td></tr>
             <% end %>
           </table>
         </div>

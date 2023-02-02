@@ -16,9 +16,9 @@
     <div class="col-sm-3 col-md-3 col-lg-3 px-3 offset-1">
       <strong>注文情報</strong>
       <table class="table table-bordered">
-        <tr><th>商品合計</th><td><%= @order.billing_amount - 800 %></td></tr>
-        <tr><th>送料</th><td>800</td></tr>
-        <tr><th>ご請求額</th><td><%= @order.billing_amount %></td></th>
+        <tr><th>商品合計</th><td><%= @order.billing_amount %></td></tr>
+        <tr><th>送料</th><td><%= @order.postage %></td></tr>
+        <tr><th>ご請求額</th><td><%=@order.billing_amount + @order.postage  %></td></th>
       </table>
     </div>
     <div class="col-sm-8 col-md-8 col-lg-8 px-8">
@@ -38,7 +38,7 @@
               <td><%= order_item.item.name %></td>
               <td><%= order_item.item.with_tax_price %></td>
               <td><%= order_item.amount %></td>
-              <td><%= order_item.amount * order_item.item.price %></td>
+              <td><%= order_item.amount * order_item.item.with_tax_price %></td>
             </tr>
           </tbody>
         <% end %>

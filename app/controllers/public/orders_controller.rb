@@ -8,6 +8,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @total = 0
+    @billing_amount = calculate(current_customer)
     if params[:order][:select] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
@@ -53,16 +54,25 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @billing_amount = calculate(current_customer)
   end
 
 
   private
   def order_params
-    params.require(:order).permit(:payment_method,:postal_code,:address,:name,:billing_amount)
+    params.require(:order).permit(:customer_id,:payment_method,:postal_code,:address,:name,:billing_amount)
   end
 
   def custome_params
     params.require(:custome).permit(:postal_code)
   end
+
+  def calculate(user)
+     billing_amount = 0
+     user.cart_items.each do |cart_item|
+       billing_amount += cart_item.amount * cart_item.item.price
+     end
+     return (billing_amount * 1.1).floor
+   end
 
 end
