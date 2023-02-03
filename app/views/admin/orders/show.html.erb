@@ -29,7 +29,7 @@
         <tr>
           <th>注文ステータス</th>
           <td><%= form_with model:@order, url: admin_order_path, local: true do |f| %>
-                <%= f.select :status, ["入金待ち", "入金確認","製作中","発送準備完了","発送完了"] %>
+                <%= f.select :making_status, ["入金待ち", "入金確認","製作中","発送準備完了","発送完了"] %>
                 <%= f.submit "更新", class: 'btn btn-primary' %>
               <% end %>
           </td>

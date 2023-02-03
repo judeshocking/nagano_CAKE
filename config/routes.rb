@@ -17,11 +17,11 @@ devise_for :admin, skip:[:registrations, :passwords], controllers: {
 
 #admin
   namespace :admin do
+    resources :orders, only:[:show,:update]
     root 'homes#top'
     resources :customers, only:[:index,:edit,:show,:update]
     resources :genres, only:[:index,:edit,:create,:update]
     resources :items, only: [:index, :create, :new, :show, :edit, :update]
-    resources :orders, only:[:show,:update]
     resources :order_items, only: [:update]
   end
 

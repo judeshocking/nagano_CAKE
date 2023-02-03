@@ -60,7 +60,7 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:customer_id,:payment_method,:postal_code,:address,:name,:billing_amount)
+    params.require(:order).permit(:customer_id,:payment_method,:postal_code,:address,:name,:billing_amount,:status)
   end
 
   def custome_params
@@ -73,6 +73,6 @@ class Public::OrdersController < ApplicationController
        billing_amount += cart_item.amount * cart_item.item.price
      end
      return (billing_amount * 1.1).floor
-   end
+  end
 
 end

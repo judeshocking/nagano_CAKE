@@ -3,11 +3,11 @@ class Admin::OrdersItemsController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order_item = OrderItem.find(params[:id])
-    @order_items = @order.order_details.all
+    @order_items = @order.order_items.all
     is_updated = true
     if @order_item.update(order_item_params)
-      @order.update(status: 2) if @order_detail.making_status == "製作中"
-        @order_details.each do |order_detail|
+      @order.update(status: 2) if @order_item.making_status == "製作中"
+        @order_items.each do |order_item|
           if order_detail.making_status != "制作完了"
             is_updated = false
           end

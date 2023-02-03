@@ -39,7 +39,7 @@
           </tr>
           <tr>
             <td>会員ステータス</td>
-            <td><% if @customer.is_deleted == true %>
+            <td><% if @customer.is_deleted == false %>
                   <div class="bg-info d-inline text-white p-1 ml-3 rounded">
                   有効
                   </div>
