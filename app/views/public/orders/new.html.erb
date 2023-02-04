@@ -12,9 +12,9 @@
     <%= form_with model: [ @order], url: orders_confirm_path, local: true do |f| %>
     <div class="row mt-3">
       <div class="offset-sm-2">
-        <%= f.radio_button :payment_method, 'credit_card'  %>
+        <%= f.radio_button :payment_method, 'クレジットカード'  %>
         <%= f.label :payment_method_credit_card, 'クレジットカード' %>
-        <%= f.radio_button :payment_method, 'transfer'  %>
+        <%= f.radio_button :payment_method, '銀行振込'  %>
         <%= f.label :payment_method_transfer, '銀行振込'%>
       </div>
     </div>

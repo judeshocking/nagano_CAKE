@@ -20,7 +20,7 @@
           <% @orders.each do |order| %>
           <tr>
             <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-            <td><%=  "〒#{order.postal_code}" %><br><%= order.address %><br><%= order.name %></td>
+            <td><%=  "〒#{order.postal_code}" %><br><%= order.address %><br><%= order.customer.last_name %><%= order.customer.first_name %></td>
             <td>
               <% order.order_items.each do |order_item| %>
                 <%= order_item.item.name %><br>

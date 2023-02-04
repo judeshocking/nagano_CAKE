@@ -8,9 +8,11 @@ class Admin::OrdersController < ApplicationController
     @order_items = OrderItem.where(order_id: params[:id])
 
     if @order.update(order_params)
-       @order_items.update_all(making_status: 1) if @order.status == "入金確認"
+       @order_items.update_all(status: 1) if @order.status == "入金確認"
     end
     redirect_to admin_order_path
+
+
   end
 
 
