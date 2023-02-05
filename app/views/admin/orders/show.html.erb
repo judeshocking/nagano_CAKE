@@ -28,8 +28,8 @@
         </tr>
         <tr>
           <th>注文ステータス</th>
-          <td><%= form_with model:@order, url: admin_order_path, method: :patch, local: true do |f| %>
-                <%= f.select :status, ["入金待ち", "入金確認","製作中","発送準備完了","発送完了"] %>
+          <td><%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
+                <%= f.select :status, Order.statuses_i18n.invert %>
                 <%= f.submit "更新", class: 'btn btn-primary' %>
               <% end %>
           </td>
@@ -44,7 +44,6 @@
         <thead>
           <tr>
             <th>商品名</th>
-            <th>単価（税込）</th>
             <th>数量</th>
             <th>小計</th>
             <th>制作ステータス</th>
@@ -57,8 +56,9 @@
               <td><%= (order_items.item.price * 1.1).floor %></td>
               <td><%= order_items.amount %></td>
               <td><%= (order_items.amount * order_items.item.price * 1.1).floor %></td>
-              <td><%= form_with model: order_items, url: admin_order_item_path, method: :patch, local: true do |f| %>
-                    <%= f.select :maiking_status, ["制作不可", "制作待", "製作中", "完成"] %>
+              <td><%= form_with model: order_items, url: admin_order_item_path(order_items.id), method: :patch, local: true do |f| %>
+                    <%= f.hidden_field :order_items_id, :value => order_items.id %>
+                    <%= f.select :making_status, OrderItem.making_statuses_i18n.invert %>
                     <%= f.submit "更新", class: 'btn btn-primary' %>
                   <% end %>
               </td>

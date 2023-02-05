@@ -1,7 +1,7 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
-    @custome = Customer.find(current_customer.id)
+    @customer = Customer.find(current_customer.id)
   end
 
   def confirm
@@ -29,19 +29,23 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    cart_items = current_customer.cart_items.all
+    @cart_items = current_customer.cart_items.all
     @order = current_customer.orders.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.status = "waiting_payment"
     if @order.save
-      cart_items.each do |cart|
+      @cart_items.each do |cart|
         order_item = OrderItem.new
         order_item.item_id = cart.item_id
         order_item.order_id = @order.id
         order_item.amount = cart.amount
+        order_item.making_status = 0
         order_item.save
       end
-      cart_items.destroy_all
+      @cart_items.destroy_all
       redirect_to orders_compleate_path
     else
+      @customer = Customer.find(current_customer.id)
       @order = Order.new(order_params)
       render :new
     end
@@ -63,9 +67,7 @@ class Public::OrdersController < ApplicationController
     params.require(:order).permit(:customer_id,:payment_method,:postal_code,:address,:name,:billing_amount,:status)
   end
 
-  def custome_params
-    params.require(:custome).permit(:postal_code)
-  end
+
 
   def calculate(user)
      billing_amount = 0

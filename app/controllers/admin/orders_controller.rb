@@ -4,15 +4,16 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find(params[:id])
-    @order_items = OrderItem.where(order_id: params[:id])
-
-    if @order.update(order_params)
-       @order_items.update_all(status: 1) if @order.status == "入金確認"
-    end
-    redirect_to admin_order_path
-
-
+     @order = Order.find(params[:id])
+     @order_items = OrderItem.where(order_id: @order)
+      if @order.update(order_params)
+        if @order.status.include?("payment_confirmation")
+           @order_items.update_all( making_status: "waiting_for_production")
+        end
+        redirect_to admin_order_path(@order)
+      else
+          render "show"
+      end
   end
 
 
