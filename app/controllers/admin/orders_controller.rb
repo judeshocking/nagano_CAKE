@@ -1,6 +1,8 @@
 class Admin::OrdersController < ApplicationController
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find_by(params[:id])
+    @orders = Order.all
+    @order_items = OrderItem.where(order_id: @order)
   end
 
   def update
