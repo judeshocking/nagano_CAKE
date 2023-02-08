@@ -57,7 +57,7 @@
               <td><%= order_items.amount %></td>
               <td><%= (order_items.amount * order_items.item.price * 1.1).floor %></td>
               <td><%= form_with model: order_items, url: admin_order_item_path(order_items.id), method: :patch, local: true do |f| %>
-                    <%= f.hidden_field :order_items_id, :value => order_items.id %>
+                    <%#= f.hidden_field :order_items_id, :value => order_items.id %>
                     <%= f.select :making_status, OrderItem.making_statuses_i18n.invert %>
                     <%= f.submit "更新", class: 'btn btn-primary' %>
                   <% end %>
